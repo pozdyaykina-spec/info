@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALINA SKLEMINA | Дизайнер маркетплейсов</title>
+  <style>
+    :root {
+      --bg: #0b0b12;
+      --card: #131320;
+      --text: #f5f5ff;
+      --muted: #a0a3b8;
+      --accent: #9f6bff;
+      --accent-2: #7a3cff;
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 20px 55px rgba(122, 60, 255, 0.22);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(159, 107, 255, 0.15) 0%, transparent 35%),
+        radial-gradient(circle at 85% 10%, rgba(122, 60, 255, 0.2) 0%, transparent 40%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .landing {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+    }
+
+    .glass {
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius);
+    }
+
+    .nav {
+      position: sticky;
+      top: 16px;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+    }
+
+    .nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .nav a {
+      display: inline-block;
+      padding: 9px 14px;
+      border-radius: 999px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.92rem;
+      border: 1px solid transparent;
+      transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .nav a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(159, 107, 255, 0.7);
+      background: rgba(159, 107, 255, 0.16);
+    }
+
+    .hero {
+      padding: 52px 34px;
+      margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(159, 107, 255, 0.5);
+      color: #d9c9ff;
+      background: rgba(159, 107, 255, 0.15);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      line-height: 1.08;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 630px;
+      margin-bottom: 18px;
+      font-size: 1.03rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border-radius: 12px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.01);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(130px, 1fr));
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(8, 8, 16, 0.48);
+      transition: transform 0.24s ease, border-color 0.24s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: rgba(159, 107, 255, 0.7);
+    }
+
+    .stat strong {
+      font-size: 1.5rem;
+      color: #fff;
+      display: block;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .section {
+      padding: 28px;
+      margin-bottom: 22px;
+    }
+
+    .section h2 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .portfolio-grid,
+    .services-grid,
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(159, 107, 255, 0.76);
+      box-shadow: var(--shadow);
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 7px;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #ceb6ff;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .service-price {
+      color: #fff;
+      margin: 8px 0;
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    .service-list {
+      padding-left: 16px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #111120;
+      color: var(--text);
+      font: inherit;
+      padding: 11px 12px;
+      outline: none;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(159, 107, 255, 0.95);
+      box-shadow: 0 0 0 3px rgba(159, 107, 255, 0.16);
+    }
+
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .checks label {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--border);
+      padding: 9px 11px;
+      border-radius: 10px;
+      color: #d2d4e9;
+      cursor: pointer;
+      background: rgba(255,255,255,0.02);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .checks label:hover {
+      transform: translateY(-2px);
+      border-color: rgba(159, 107, 255, 0.7);
+    }
+
+    .checks input {
+      width: auto;
+      accent-color: var(--accent);
+      padding: 0;
+    }
+
+    .result {
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(159, 107, 255, 0.45);
+      background: linear-gradient(135deg, rgba(159,107,255,0.13), rgba(122,60,255,0.08));
+    }
+
+    .result strong {
+      display: block;
+      font-size: 1.7rem;
+      margin-top: 7px;
+    }
+
+    .result small {
+      color: #d2c7ef;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .footer {
+      padding: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .calculator,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 28px 20px;
+      }
+
+      .section {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .nav {
+        position: static;
+      }
+
+      .checks {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="landing" id="top">
+    <header class="nav glass">
+      <div class="logo">ALINA SKLEMINA</div>
+      <ul>
+        <li><a href="#portfolio">Портфолио</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#calculator">Калькулятор</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </header>
+
+    <section class="hero glass">
+      <div>
+        <span class="badge">Дизайн карточек для Wildberries и Ozon</span>
+        <h1>ALINA SKLEMINA</h1>
+        <p>Создаю коммерческие визуалы для маркетплейсов, которые повышают CTR и помогают выделяться в выдаче. Более 200 карточек в 15+ нишах, от fashion до электроники.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#calculator">Рассчитать стоимость</a>
+          <a class="btn btn-secondary" href="#portfolio">Смотреть кейсы</a>
+        </div>
+      </div>
+      <div class="stats">
+        <article class="stat">
+          <strong>+38%</strong>
+          <span>средний рост CTR после обновления визуала</span>
+        </article>
+        <article class="stat">
+          <strong>200+</strong>
+          <span>реализованных карточек товаров</span>
+        </article>
+        <article class="stat">
+          <strong>15+</strong>
+          <span>ниш: fashion, food, beauty, electronics</span>
+        </article>
+        <article class="stat">
+          <strong>1–4 дня</strong>
+          <span>срок выполнения в зависимости от задачи</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section glass" id="portfolio">
+      <h2>Портфолио</h2>
+      <p class="section-subtitle">Коммерческие кейсы, которые уже работают в выдаче маркетплейсов.</p>
+      <div class="portfolio-grid">
+        <article class="card">
+          <span class="label">fashion</span>
+          <h3>Ремень</h3>
+          <p>Обновлена обложка и инфографика: акцент на материале, посадке и преимуществах в первом экране.</p>
+        </article>
+        <article class="card">
+          <span class="label">electronics</span>
+          <h3>Smart TV</h3>
+          <p>Построен визуал с четкой иерархией характеристик и модульной подачей выгод для быстрого скролла.</p>
+        </article>
+        <article class="card">
+          <span class="label">food</span>
+          <h3>Мёд с орехами</h3>
+          <p>Добавлена аппетитная предметная сцена и чистая композиция для роста вовлеченности в выдаче.</p>
+        </article>
+        <article class="card">
+          <span class="label">beauty</span>
+          <h3>Коллаген</h3>
+          <p>Собран современный визуальный стиль с доверием к бренду и понятной коммуникацией пользы.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section glass" id="services">
+      <h2>Услуги и цены</h2>
+      <p class="section-subtitle">Все цены ориентировочные и уточняются после брифа.</p>
+      <div class="services-grid">
+        <article class="card">
+          <h3>Обложка</h3>
+          <div class="service-price">1 500 ₽ / слайд</div>
+          <ul class="service-list">
+            <li>Анализ конкурентов и ЦА</li>
+            <li>Примерка в выдаче</li>
+            <li>Ретушь и подготовка под маркетплейсы</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Слайд</h3>
+          <div class="service-price">1 000 ₽ / слайд</div>
+          <ul class="service-list">
+            <li>Инфографика и единый стиль</li>
+            <li>Ретушь и структура подачи</li>
+            <li>Проверка читаемости в карточке</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>CTR-тест (3 обложки)</h3>
+          <div class="service-price">4 000 ₽</div>
+          <ul class="service-list">
+            <li>3 концепта обложки</li>
+            <li>Аналитика и гипотезы</li>
+            <li>Рекомендации по запуску теста</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Замена / адаптация</h3>
+          <div class="service-price">500 ₽ / слайд</div>
+          <ul class="service-list">
+            <li>Адаптация под другой маркетплейс</li>
+            <li>Сохранение стиля бренда</li>
+            <li>Техническая подгонка формата</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Рич-контент</h3>
+          <div class="service-price">1 000 ₽ / блок</div>
+          <ul class="service-list">
+            <li>Продуманная структура блоков</li>
+            <li>Единый визуальный ритм</li>
+            <li>Фокус на удержание внимания</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Исходник PSD</h3>
+          <div class="service-price">1 500 ₽ / артикул</div>
+          <ul class="service-list">
+            <li>Защита авторских прав</li>
+            <li>Фиксированный PSD-файл</li>
+            <li>Передача согласованной версии</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section glass" id="calculator">
+      <h2>Калькулятор бюджета</h2>
+      <p class="section-subtitle">Выберите параметры проекта — получите ориентировочную стоимость и предоплату 50%.</p>
+      <div class="calculator">
+        <form class="form-grid" id="budgetForm">
+          <label>
+            Тип услуги
+            <select id="serviceType" name="serviceType">
+              <option value="1500">Обложка — 1 500 ₽ / слайд</option>
+              <option value="1000">Слайд — 1 000 ₽ / слайд</option>
+              <option value="1333">CTR-тест — 4 000 ₽ / 3 обложки</option>
+            </select>
+          </label>
+          <label>
+            Количество слайдов / блоков
+            <input id="slides" name="slides" type="number" min="1" value="3" />
+          </label>
+          <div>
+            <p style="margin-bottom:8px;color:var(--muted);font-size:.9rem">Дополнительные опции</p>
+            <div class="checks">
+              <label><input type="checkbox" data-cost="500" /> Адаптация (+500 ₽/слайд)</label>
+              <label><input type="checkbox" data-cost="300" /> Помощь с ТЗ (+300 ₽/слайд)</label>
+              <label><input type="checkbox" data-cost="1500" /> PSD исходник (+1 500 ₽)</label>
+              <label><input type="checkbox" data-cost="1000" /> Рич-контент (+1 000 ₽/блок)</label>
+            </div>
+          </div>
+        </form>
+        <aside class="result" aria-live="polite">
+          <small>Ориентировочная сумма</small>
+          <strong id="total">0 ₽</strong>
+          <small>Предоплата 50%: <span id="prepay">0 ₽</span></small>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section glass" id="reviews">
+      <h2>Отзывы клиентов</h2>
+      <p class="section-subtitle">Реальные результаты после обновления визуала карточек.</p>
+      <div class="reviews-grid">
+        <article class="card">
+          <h3>Анна · косметика</h3>
+          <p>«После редизайна обложек CTR на Wildberries вырос на <strong>42%</strong>. Стало больше переходов и заказов уже в первую неделю».</p>
+        </article>
+        <article class="card">
+          <h3>Дмитрий · электроника</h3>
+          <p>«На Ozon выросла конверсия: карточка стала понятной и визуально сильной. Отличный баланс дизайна и аналитики».</p>
+        </article>
+        <article class="card">
+          <h3>Екатерина · food</h3>
+          <p>«Рич-контент улучшил поведение покупателей: дольше изучают карточку, меньше вопросов перед покупкой».</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section glass" id="contacts">
+      <h2>Контакты</h2>
+      <p class="section-subtitle">Оставьте заявку — отвечу в Telegram и предложу решение под вашу задачу.</p>
+      <div class="contact-grid">
+        <article class="card">
+          <h3>Связь через Telegram</h3>
+          <p>Работаю с брендами и селлерами маркетплейсов. Для старта пришлите нишу, артикул и цель: CTR, конверсия или рич-контент.</p>
+        </article>
+        <form class="form-grid card">
+          <label>
+            Имя
+            <input type="text" name="name" placeholder="Ваше имя" required />
+          </label>
+          <label>
+            Telegram
+            <input type="text" name="telegram" placeholder="@username" required />
+          </label>
+          <label>
+            Описание задачи
+            <textarea name="task" rows="4" placeholder="Кратко опишите ваш товар и задачу" required></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Отправить заявку</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">© 2025 Склемина Алина · Сделано на Tilda</footer>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById('budgetForm');
+      const serviceType = document.getElementById('serviceType');
+      const slides = document.getElementById('slides');
+      const totalEl = document.getElementById('total');
+      const prepayEl = document.getElementById('prepay');
+
+      function format(value) {
+        return new Intl.NumberFormat('ru-RU').format(Math.round(value)) + ' ₽';
+      }
+
+      function calc() {
+        const perSlide = Number(serviceType.value) || 0;
+        const count = Math.max(1, Number(slides.value) || 1);
+
+        let total = perSlide * count;
+
+        const options = form.querySelectorAll('input[type="checkbox"]');
+        options.forEach((option) => {
+          if (option.checked) {
+            const cost = Number(option.dataset.cost || 0);
+            if (cost === 1500) {
+              total += cost;
+            } else {
+              total += cost * count;
+            }
+          }
+        });
+
+        totalEl.textContent = format(total);
+        prepayEl.textContent = format(total / 2);
+      }
+
+      form.addEventListener('input', calc);
+      calc();
+    })();
+  </script>
+</body>
+</html>
